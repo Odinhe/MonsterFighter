@@ -18,13 +18,13 @@ for(var i=0;i<24;i++){
 	var inst_card=instance_create_layer(100,room_height/2-i*3,"Instances",obj_card);
 	inst_card.depth=-i;
 	if(i>=0&&i<=7){
-		inst_card.suite="paper";
+		inst_card.suite="heal";
 	}
 	if(i>=8&&i<=15){
-		inst_card.suite="scissor";
+		inst_card.suite="attack";
 	}
 	if(i>15){
-		inst_card.suite="stone";
+		inst_card.suite="defense";
 	}
 	ds_list_add(global.cardList,inst_card);
 }

@@ -24,6 +24,6 @@ choosingSndPlayed=false;
 clickingSndPlayed=false;
 discardingSndPlayed=false;
 resultSndPlayed=false;
-
+Anger = 50;
 pathStarted=true;
 timeCounter=0;

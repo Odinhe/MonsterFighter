@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
-//Dealing the cards
+if(PerfectD >= 5 && keyboard_check(ord("Z"))){
+	obj_deck.computerScore -= 200;
+}
 if(!discard){
 	if(targetX!=-1&&targetY!=-1){
 		shuffling=false;
@@ -78,59 +80,65 @@ if(!discard){
 		y=lerp(y,room_height-100,0.2);
 	}
 	if(global.clickedCard!=undefined&&isChosen){
-		if(suite=="paper"){
+		if(suite=="heal"){
 			sprite_index=spr_paper;
 		}
-		else if(suite=="scissor"){
+		else if(suite=="attack"){
 			sprite_index=spr_scissor;
 		}
-		else if(suite=="stone"){
+		else if(suite=="defense"){
 			sprite_index=spr_rock;
 		}
 		if(!global.scoreAdded){
-		if(global.clickedCard.suite=="paper"){
-			if(suite=="scissor"){
-				obj_deck.computerScore++;
+		if(global.clickedCard.suite=="heal"){ //healing
+			part_particles_create(particle_system, 350,350,explosion_particle_type,100);
+			if(suite=="attack"){
+				obj_deck.playerScore = obj_deck.playerScore + 10;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_lose,0,false);
 				}
 			}
-			else if(suite=="stone"){
-				obj_deck.playerScore++;
+			else if(suite=="defense"){
+				Anger += 25;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_win,0,false);
 				}
 			}
 			else if(!resultSndPlayed){
-				audio_play_sound(snd_draw,0,false);
+				obj_deck.playerScore += 25;
+				obj_deck.computerScore += 25;
 			}
 		}
-		else if(global.clickedCard.suite=="scissor"){
-			if(suite=="paper"){
-				obj_deck.playerScore++;
+		else if(global.clickedCard.suite=="attack"){
+			part_particles_create(particle_system, 350,350,explosion_particle_type,100);
+			if(suite=="heal"){
+				obj_deck.computerScore -= 20;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_win,0,false);
 				}
 			}
-			else if(suite=="stone"){
-				obj_deck.computerScore++;
+			else if(suite=="defense"){
+				Anger += 50;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_lose,0,false);
 				}
 			}
 			else if(!resultSndPlayed){
+				obj_deck.playerScore -= 25;
+				obj_deck.computerScore -= 40;
 				audio_play_sound(snd_draw,0,false);
 			}
 		}
-		else if(global.clickedCard.suite=="stone"){
-			if(suite=="paper"){
-				obj_deck.computerScore++;
+		else if(global.clickedCard.suite=="defense"){
+			part_particles_create(particle_system, 350,350,explosion_particle_type,100);
+			if(suite=="heal"){
+				obj_deck.computerScore+= 50;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_lose,0,false);
 				}
 			}
-			else if(suite=="scissor"){
-				obj_deck.playerScore++;
+			else if(suite=="attack"){
+				PerfectD = PerfectD + 1;
 				if(!resultSndPlayed){
 					audio_play_sound(snd_win,0,false);
 				}
